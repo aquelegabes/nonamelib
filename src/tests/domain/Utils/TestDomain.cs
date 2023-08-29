@@ -24,6 +24,17 @@ internal class TestDomain : IDomain<string>
     [PersonalIdentification(typeof(IdentificationCPF))]
     public string CPF { get; init; }
 
+    [Required]
+    [NotDefault]
+    [Comparison(
+        BooleanResolver.ComparisonType.GreaterThan,
+        nameof(ContractDate))]
+    public DateTime BeginDate { get; init; }
+
+    [Required]
+    [NotDefault]
+    public DateTime ContractDate { get; init; }
+
     public TestDomain(
         string fullName,
         DateTime birthDate)

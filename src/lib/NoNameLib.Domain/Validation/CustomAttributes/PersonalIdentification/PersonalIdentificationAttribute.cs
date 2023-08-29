@@ -1,5 +1,4 @@
-﻿using NoNameLib.Domain.Utils.Exceptions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NoNameLib.Domain.Validation;
 
@@ -9,9 +8,23 @@ public class PersonalIdentificationAttribute : ValidationAttribute
     private readonly Type _identificationType;
 
     public PersonalIdentificationAttribute(
-        Type IdentificationType)
+        Type identificationType)
     {
-        _identificationType = IdentificationType;
+        _identificationType = identificationType;
+    }
+
+    public PersonalIdentificationAttribute(
+        Type identificationType,
+        Func<string> errorMessageAccessor) : base(errorMessageAccessor)
+    {
+        _identificationType = identificationType;
+    }
+
+    public PersonalIdentificationAttribute(
+        Type identificationType,
+        string errorMessage) : base(errorMessage)
+    {
+        _identificationType = identificationType;
     }
 
     public override bool IsValid(object value)

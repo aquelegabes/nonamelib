@@ -1,5 +1,4 @@
-﻿using NoNameLib.Domain.Utils.Exceptions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NoNameLib.Domain.Validation;
 
