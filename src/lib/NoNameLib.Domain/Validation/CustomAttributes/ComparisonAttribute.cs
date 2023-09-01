@@ -5,41 +5,52 @@ namespace NoNameLib.Domain.Validation;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public class ComparisonAttribute : ValidationAttribute
 {
-    private readonly BooleanResolver.ComparisonType _comparisonType;
+    private readonly ComparisonType _comparisonType;
 
-    private readonly string _fieldNameToCompare;
+    private readonly string _fieldNameToCompare1;
+    private readonly string _fieldNameToCompare2;
 
     private object _fullObject;
 
     public ComparisonAttribute(
-        BooleanResolver.ComparisonType comparisonType,
-        string fieldNameToCompare)
+        ComparisonType comparisonType,
+        string fieldNameToCompare1,
+        string fieldNameToCompare2 = null)
     {
         _comparisonType = comparisonType;
-        _fieldNameToCompare = fieldNameToCompare;
+        _fieldNameToCompare1 = fieldNameToCompare1;
+        _fieldNameToCompare2 = fieldNameToCompare2;
     }
 
     public override bool IsValid(object value)
     {
-        if (value == null)
-        {
-            return false;
-        }
+        object comparisonValue2 = null;
 
-        var comparisonValue = _fullObject
+        if (value == null)
+            return false;
+
+        var comparisonValue1 = _fullObject
             .GetType()
             .GetProperties()
-            .Single(prop => prop.Name.Equals(_fieldNameToCompare))
+            .Single(prop => prop.Name.Equals(_fieldNameToCompare1))
             .GetValue(_fullObject)
-            ?? throw new MemberAccessException($"Object does not contain a member named: {_fieldNameToCompare}");
+            ?? throw new MemberAccessException($"Object does not contain a member named: {_fieldNameToCompare1}");
 
-        return value.GetType() != comparisonValue.GetType()
-            ? throw new InvalidOperationException("Both fields must have the same type!")
-            : BooleanResolver.ResolveConditional(
+        if (!string.IsNullOrWhiteSpace(_fieldNameToCompare2))
+        {
+            comparisonValue2 = _fullObject
+                .GetType()
+                .GetProperties()
+                .Single(prop => prop.Name.Equals(_fieldNameToCompare2))
+                .GetValue(_fullObject);
+        }
+
+        return BooleanResolver.ResolveConditional(
                 value.GetType(),
                 _comparisonType,
                 value,
-                comparisonValue);
+                comparisonValue1,
+                comparisonValue2);
     }
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)

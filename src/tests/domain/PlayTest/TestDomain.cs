@@ -1,14 +1,18 @@
 ﻿using NoNameLib.Domain.Validation.PersonalIdentification.Brazil;
 using System.ComponentModel.DataAnnotations;
 
-namespace NoNameLib.Domain.Tests.Utils;
+namespace NoNameLib.Domain.Tests.PlayTest;
 
-internal class TestDomain : IDomain<string>
+public class TestDomain : IDomain<string>
 {
     private readonly Guid _id;
 
     [Key]
-    public string Id => _id.ToString();
+    public string Id
+    {
+        get { return _id.ToString(); }
+        init { _id = Guid.Parse(value); }
+    }
 
     [Required(AllowEmptyStrings = false)]
     [MaxLength(100)]
@@ -27,7 +31,7 @@ internal class TestDomain : IDomain<string>
     [Required]
     [NotDefault]
     [Comparison(
-        BooleanResolver.ComparisonType.GreaterThan,
+        ComparisonType.GreaterThan,
         nameof(ContractDate))]
     public DateTime BeginDate { get; init; }
 

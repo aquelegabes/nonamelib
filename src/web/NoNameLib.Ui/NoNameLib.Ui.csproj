@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\NoNameLib.Domain\NoNameLib.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
