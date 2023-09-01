@@ -10,7 +10,8 @@ public abstract class CommandEventArgs : EventArgs
     }
 
     public TDomain GetDomain<TDomain>()
+        where TDomain : class
     {
-        return (TDomain)_domain;
+        return _domain as TDomain;
     }
 }
