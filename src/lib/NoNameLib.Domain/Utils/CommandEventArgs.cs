@@ -14,4 +14,9 @@ public abstract class CommandEventArgs : EventArgs
     {
         return _domain as TDomain;
     }
+
+    public object GetDomain()
+    {
+        return _domain;
+    }
 }

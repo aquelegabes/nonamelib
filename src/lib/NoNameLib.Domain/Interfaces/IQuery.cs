@@ -13,17 +13,19 @@ public interface IQueryAsync<TDomain> : IDisposable
         CancellationToken cancellationToken = default);
 }
 
-public interface IQueryFiltered<TDomain>
+public interface IQueryFiltered<TDomain, TFilter>
     where TDomain : class
+    where TFilter : QueryFilter
 {
     IQueryable<TDomain> Get(
-        QueryFilter queryFilter);
+        TFilter queryFilter);
 }
 
-public interface IQueryFilteredAsync<TDomain> : IDisposable
+public interface IQueryFilteredAsync<TDomain, TFilter> : IDisposable
     where TDomain : class
+    where TFilter : QueryFilter
 {
     Task<IQueryable<TDomain>> GetAsync(
-        QueryFilter queryFilter,
+        TFilter queryFilter,
         CancellationToken cancellationToken = default);
 }

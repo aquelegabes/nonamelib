@@ -2,20 +2,45 @@
 
 public abstract class Command
 {
-    protected event EventHandler<CommandEventArgs> CommandSent;
-    public virtual void OnCommandSent(CommandEventArgs e)
+    protected event EventHandler<CommandEventArgs> AfterHandle;
+    protected event EventHandler<CommandEventArgs> BeforeHandle;
+
+    protected virtual void OnBeforeHandle(CommandEventArgs e)
     {
-        CommandSent?.Invoke(this, e);
+        BeforeHandle?.Invoke(this, e);
+    }
+
+    protected virtual void OnAfterHandle(CommandEventArgs e)
+    {
+        AfterHandle?.Invoke(this, e);
+    }
+
+    public void AddNotificationsBeforeHandle(
+        params INotification[] notifications)
+    {
+        foreach (var notification in notifications)
+        {
+            BeforeHandle += notification.Notify;
+        }
+    }
+
+    public void AddNotificationsAfterHandle(
+        params INotification[] notifications)
+    {
+        foreach (var notification in notifications)
+        {
+            AfterHandle -= notification.Notify;
+        }
     }
 }
 
 public interface ICommand<TDomain>
     where TDomain : class
 {
-    TDomain Send(TDomain domain);
+    TDomain Handle(TDomain domain);
 }
 
 public interface ICommandAsync<TDomain> : IDisposable
 {
-    Task<TDomain> SendAsync(TDomain domain, CancellationToken cancellationToken = default);
+    Task<TDomain> HandleAsync(TDomain domain, CancellationToken cancellationToken = default);
 }

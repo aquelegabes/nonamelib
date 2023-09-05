@@ -2,8 +2,9 @@
 {
     public class IdentificationPIS : IdentificationType
     {
-        public IdentificationPIS(
-            string identifier) : base(identifier) { }
+        public IdentificationPIS(string identifier) : base(identifier)
+        {
+        }
 
         public override bool IsValid()
         {
