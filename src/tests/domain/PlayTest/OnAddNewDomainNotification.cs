@@ -18,7 +18,7 @@
                 {
                     Id = Guid.NewGuid().ToString(),
                     Object = e.GetDomain()
-                });
+                },TransactionType.Create);
         }
     }
 }

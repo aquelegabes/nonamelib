@@ -4,7 +4,7 @@ public class AuditsRepository : IRepository<Auditable<TestDomain>>
 {
     private readonly List<Auditable<TestDomain>> _auditable;
     public AuditsRepository(
-        TestList testList)
+        MainTestingObject testList)
     {
         _auditable = testList.AuditableList;
     }
@@ -14,7 +14,11 @@ public class AuditsRepository : IRepository<Auditable<TestDomain>>
         _auditable.Remove(domain);
     }
 
-    public int SaveChanges(Auditable<TestDomain> domain)
+    public void Dispose()
+    {
+    }
+
+    public int SaveChanges(Auditable<TestDomain> domain, TransactionType eventType)
     {
         ValidationHandler.Validate(domain);
         _auditable.Add(domain);

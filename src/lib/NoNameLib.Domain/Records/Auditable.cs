@@ -4,6 +4,6 @@ public record Auditable<TData>
 {
     public TData ModifiedData { get; set; }
     public TData OriginalData { get; set; }
-    public EventType EventType { get; set; }
+    public TransactionType EventType { get; set; }
     public DateTime AuditDate { get; set; }
 }

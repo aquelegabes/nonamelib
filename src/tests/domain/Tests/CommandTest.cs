@@ -1,11 +1,11 @@
-﻿namespace NoNameLib.Domain.Tests;
+﻿namespace NoNameLib.Domain.Tests.Tests;
 
 public class CommandTest
 {
     [Fact]
     public void PassingTest_AddNewDomain()
     {
-        var testList = new TestList();
+        var testList = new MainTestingObject();
         var newDomain = new TestDomain("Alexandre Santos", new DateTime(year: 1998, month: 9, day: 4))
         {
             ContractDate = DateTime.Now,
@@ -26,7 +26,7 @@ public class CommandTest
     [Fact]
     public void PassingTest_AddNewDomainAndNotify()
     {
-        var testList = new TestList();
+        var testList = new MainTestingObject();
         var newDomain = new TestDomain("Alexandre Santos", new DateTime(year: 1998, month: 9, day: 4))
         {
             ContractDate = DateTime.Now,

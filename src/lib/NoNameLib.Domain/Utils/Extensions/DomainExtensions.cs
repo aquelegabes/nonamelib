@@ -14,12 +14,18 @@ public static class DomainExtensions
             .GetProperties()
             .Where(prop => prop.SetMethod != null);
 
-        foreach ( var propInfo in mutablePropInfos )
+        foreach (var propInfo in mutablePropInfos)
         {
             var newPropValue = propInfo.GetValue(newerDomain);
+
+            if (newPropValue is null
+                || newPropValue == default
+                || !propInfo.GetCustomAttributes(typeof(MutableDataMemberAttribute), true).Any())
+            {
+                continue;
+            }
+
             propInfo.SetValue(existingDomain, newPropValue);
         }
-
-        ValidationHandler.Validate(existingDomain);
     }
 }

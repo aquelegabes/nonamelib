@@ -3,7 +3,7 @@
 public class TestDomainFilters : QueryFilter
 {
     public string Id { get; set; }
-    public string Name { get; set; }
+    public string FullName { get; set; }
 }
 
 public class TestDomainQueryHandler :
@@ -12,7 +12,7 @@ public class TestDomainQueryHandler :
 {
     private readonly List<TestDomain> _domains;
 
-    public TestDomainQueryHandler(TestList statics)
+    public TestDomainQueryHandler(MainTestingObject statics)
     {
         _domains = statics.TestDomainList;
     }
@@ -26,8 +26,8 @@ public class TestDomainQueryHandler :
         if (!string.IsNullOrWhiteSpace(queryFilter.Id))
             queryBase = queryBase.Where(_ => _.Id.Equals(queryFilter.Id));
 
-        if (!string.IsNullOrWhiteSpace(queryFilter.Name))
-            queryBase = queryBase.Where(_ => _.FullName.Contains(queryFilter.Name, StringComparison.InvariantCultureIgnoreCase));
+        if (!string.IsNullOrWhiteSpace(queryFilter.FullName))
+            queryBase = queryBase.Where(_ => _.FullName.Contains(queryFilter.FullName, StringComparison.InvariantCultureIgnoreCase));
 
         return queryBase;
     }

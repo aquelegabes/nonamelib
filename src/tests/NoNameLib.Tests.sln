@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Domain", "..\lib\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{FCC34DC6-44B0-4B09-8DAF-95FC8386F959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoNameLib.DependencyInjection", "..\lib\NoNameLib.DependencyInjection\NoNameLib.DependencyInjection.csproj", "{50D65698-15AB-4BCF-BA62-4B4067500CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.DependencyInjection", "..\lib\NoNameLib.DependencyInjection\NoNameLib.DependencyInjection.csproj", "{50D65698-15AB-4BCF-BA62-4B4067500CC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoNameLib.Extensions.Dappper", "NoNameLib.Extensions.Dappper\NoNameLib.Extensions.Dappper.csproj", "{283B8EE6-9305-4AE2-9A19-407DE64D9AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{50D65698-15AB-4BCF-BA62-4B4067500CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D65698-15AB-4BCF-BA62-4B4067500CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D65698-15AB-4BCF-BA62-4B4067500CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{283B8EE6-9305-4AE2-9A19-407DE64D9AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{283B8EE6-9305-4AE2-9A19-407DE64D9AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{283B8EE6-9305-4AE2-9A19-407DE64D9AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{283B8EE6-9305-4AE2-9A19-407DE64D9AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A1C002A4-35EA-4A4B-92F9-5105A572652E} = {FCC34DC6-44B0-4B09-8DAF-95FC8386F959}
 		{50D65698-15AB-4BCF-BA62-4B4067500CC7} = {FCC34DC6-44B0-4B09-8DAF-95FC8386F959}
+		{283B8EE6-9305-4AE2-9A19-407DE64D9AE7} = {FCC34DC6-44B0-4B09-8DAF-95FC8386F959}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83973962-5A1B-4CDA-A9A1-094726845E5A}

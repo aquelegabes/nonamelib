@@ -1,4 +1,4 @@
-﻿using NoNameLib.Domain.Records;
+﻿#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 
 namespace NoNameLib.Domain.Tests.PlayTest;
 
@@ -30,18 +30,18 @@ public class TestDomainCommandHandler
         Auditable<TestDomain> audit = new()
         {
             AuditDate = DateTime.Now,
-            EventType = EventType.Create,
+            EventType = TransactionType.Create,
             ModifiedData = args.GetDomain<TestDomain>()
         };
 
-        audits.SaveChanges(audit);
+        audits.SaveChanges(audit, TransactionType.Create);
     }
 
     public TestDomain Handle(TestDomain domain)
     {
         OnBeforeHandle(new AddNewDomainCommandEventArgs(domain));
 
-        testDomains.SaveChanges(domain);
+        testDomains.SaveChanges(domain, TransactionType.Create);
 
         OnAfterHandle(new AddNewDomainCommandEventArgs(domain));
         return domain;

@@ -1,13 +1,13 @@
 ﻿using NoNameLib.Domain.Interfaces;
 
-namespace NoNameLib.Domain.Tests;
+namespace NoNameLib.Domain.Tests.Tests;
 
 public class QueryTest
 {
     [Fact]
     public void PassingTest_QueryGet()
     {
-        var testList = new TestList();
+        var testList = new MainTestingObject();
 
         var queryHandler = new TestDomainQueryHandler(testList);
         var result = queryHandler.Get();
@@ -20,10 +20,10 @@ public class QueryTest
     [Fact]
     public void PassingTest_QueryFilterGetName()
     {
-        var testList = new TestList();
+        var testList = new MainTestingObject();
 
         var queryHandler = new TestDomainQueryHandler(testList);
-        var filters = new TestDomainFilters() { Name = "vinicius" };
+        var filters = new TestDomainFilters() { FullName = "vinicius" };
 
         var result = queryHandler.Get(filters);
         Assert.NotNull(result);
@@ -33,7 +33,7 @@ public class QueryTest
     [Fact]
     public void PassingTest_QueryFilterGetId()
     {
-        var testList = new TestList();
+        var testList = new MainTestingObject();
         var id = "6909c4c9-5ebc-4d34-960a-b78dc91263e6";
 
         var queryHandler = new TestDomainQueryHandler(testList);

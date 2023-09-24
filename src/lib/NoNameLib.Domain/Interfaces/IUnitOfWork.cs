@@ -1,9 +1,15 @@
 ﻿namespace NoNameLib.Domain.Interfaces;
 
-public interface IUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
-    IRepository<TDomain> GetRepository<TDomain>()
-        where TDomain : class;
     int Commit();
+    void BeginTransaction();
+    void RollbackTransaction();
+}
+
+public interface IAsyncUnitOfWork
+{
     Task<int> CommitAsync();
+    Task BeginTransactionAsync();
+    Task RollbackTransactionAsync();
 }

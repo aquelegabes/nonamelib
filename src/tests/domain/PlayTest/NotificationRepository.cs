@@ -5,7 +5,7 @@ public class NotificationRepository : IRepository<NotificationObject>
     private readonly List<NotificationObject> _notifications;
 
     public NotificationRepository(
-        TestList testList)
+        MainTestingObject testList)
     {
         _notifications = testList.NotificationObjectsList;
     }
@@ -15,7 +15,11 @@ public class NotificationRepository : IRepository<NotificationObject>
         _notifications.Remove(domain);
     }
 
-    public int SaveChanges(NotificationObject domain)
+    public void Dispose()
+    {
+    }
+
+    public int SaveChanges(NotificationObject domain, TransactionType eventType)
     {
         ValidationHandler.Validate(domain);
         _notifications.Add(domain);

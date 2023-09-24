@@ -5,7 +5,7 @@ public class TestDomainRepository : IRepository<TestDomain>
     private readonly List<TestDomain> _domains;
 
     public TestDomainRepository(
-        TestList testList)
+        MainTestingObject testList)
     {
         _domains = testList.TestDomainList;
     }
@@ -15,7 +15,11 @@ public class TestDomainRepository : IRepository<TestDomain>
         _domains.Remove(domain);
     }
 
-    public int SaveChanges(TestDomain domain)
+    public void Dispose()
+    {
+    }
+
+    public int SaveChanges(TestDomain domain, TransactionType eventType)
     {
         ValidationHandler.Validate(domain);
         _domains.Add(domain);

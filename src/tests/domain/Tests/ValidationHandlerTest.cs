@@ -2,7 +2,7 @@ using NoNameLib.Domain.Tests.PlayTest;
 using NoNameLib.Domain.Utils.Extensions;
 using System.ComponentModel.DataAnnotations;
 
-namespace NoNameLib.Domain.Tests;
+namespace NoNameLib.Domain.Tests.Tests;
 
 public class ValidationHandlerTest
 {

@@ -1,8 +1,10 @@
 ﻿using NoNameLib.Domain.Validation.PersonalIdentification.Brazil;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NoNameLib.Domain.Tests.PlayTest;
 
+[Table(nameof(TestDomain))]
 public class TestDomain : IDomain<string>
 {
     private readonly Guid _id;
@@ -15,14 +17,17 @@ public class TestDomain : IDomain<string>
     }
 
     [Required(AllowEmptyStrings = false)]
+    [MutableDataMember]
     [MaxLength(100)]
     public string FullName { get; init; }
 
     [Required]
     [NotDefault]
+    [DataType(DataType.DateTime)]
     public DateTime BirthDate { get; init; }
 
     [NotNegative]
+    [MutableDataMember]
     public int IntValue { get; init; }
 
     [PersonalIdentification(typeof(IdentificationCPF))]
@@ -30,6 +35,7 @@ public class TestDomain : IDomain<string>
 
     [Required]
     [NotDefault]
+    [DataType(DataType.DateTime)]
     [Comparison(
         ComparisonType.GreaterThan,
         nameof(ContractDate))]
@@ -37,6 +43,7 @@ public class TestDomain : IDomain<string>
 
     [Required]
     [NotDefault]
+    [DataType(DataType.DateTime)]
     public DateTime ContractDate { get; init; }
 
     public TestDomain(
