@@ -29,7 +29,7 @@ public abstract class Command
     {
         foreach (var notification in notifications)
         {
-            AfterHandle -= notification.Notify;
+            AfterHandle += notification.Notify;
         }
     }
 }

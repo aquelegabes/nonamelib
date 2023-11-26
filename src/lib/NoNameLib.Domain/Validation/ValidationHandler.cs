@@ -24,8 +24,7 @@ public static class ValidationHandler
         {
             List<ValidationException> exceptions = new();
 
-            errors.ForEach(err =>
-                exceptions.Add(new ValidationException(err.ErrorMessage)));
+            Parallel.ForEach(errors, error => exceptions.Add(new ValidationException(error.ErrorMessage)));
 
             throw new AggregateException("Multiple validation errors has occurred, check inner exception for details.", exceptions);
         }

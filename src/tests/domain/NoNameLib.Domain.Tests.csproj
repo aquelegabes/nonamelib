@@ -29,8 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\NoNameLib.DependencyInjection\NoNameLib.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\lib\NoNameLib.Domain\NoNameLib.Domain.csproj" />
-    <ProjectReference Include="..\NoNameLib.Extensions.Dappper\NoNameLib.Extensions.Dappper.csproj" />
+    <ProjectReference Include="..\..\lib\NoNameLib.Extensions.Dappper\NoNameLib.Extensions.Dappper.csproj" />
   </ItemGroup>
 
 </Project>
