@@ -9,7 +9,7 @@ public interface IUnitOfWork : IDisposable
 
 public interface IAsyncUnitOfWork
 {
-    Task<int> CommitAsync();
+    Task<int> CommitAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync();
     Task RollbackTransactionAsync();
 }

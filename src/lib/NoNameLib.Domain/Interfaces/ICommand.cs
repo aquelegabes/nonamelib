@@ -5,12 +5,12 @@ public abstract class Command
     protected event EventHandler<CommandEventArgs> AfterHandle;
     protected event EventHandler<CommandEventArgs> BeforeHandle;
 
-    protected virtual void OnBeforeHandle(CommandEventArgs e)
+    protected void OnBeforeHandle(CommandEventArgs e)
     {
         BeforeHandle?.Invoke(this, e);
     }
 
-    protected virtual void OnAfterHandle(CommandEventArgs e)
+    protected void OnAfterHandle(CommandEventArgs e)
     {
         AfterHandle?.Invoke(this, e);
     }
@@ -40,7 +40,8 @@ public interface ICommand<TDomain>
     TDomain Handle(TDomain domain);
 }
 
-public interface ICommandAsync<TDomain> : IDisposable
+public interface IAsyncCommand<TDomain>
+    where TDomain : class
 {
     Task<TDomain> HandleAsync(TDomain domain, CancellationToken cancellationToken = default);
 }

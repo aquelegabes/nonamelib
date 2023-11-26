@@ -6,7 +6,7 @@ public interface IQuery<TDomain>
     IQueryable<TDomain> Get();
 }
 
-public interface IQueryAsync<TDomain> : IDisposable
+public interface IAsyncQuery<TDomain> : IDisposable
     where TDomain : class
 {
     Task<IQueryable<TDomain>> GetAsync(
@@ -21,7 +21,7 @@ public interface IQueryFiltered<TDomain, TFilter>
         TFilter queryFilter);
 }
 
-public interface IQueryFilteredAsync<TDomain, TFilter> : IDisposable
+public interface IAsyncQueryFiltered<TDomain, TFilter> : IDisposable
     where TDomain : class
     where TFilter : QueryFilter
 {
