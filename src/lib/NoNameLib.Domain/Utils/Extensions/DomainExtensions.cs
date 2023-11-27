@@ -4,9 +4,10 @@ namespace NoNameLib.Domain.Utils.Extensions;
 
 public static class DomainExtensions
 {
-    public static void Update<TKey>(
+    internal static void Update<TKey>(
         this IDomain<TKey> existingDomain,
-        IDomain<TKey> newerDomain)
+        Type modelType,
+        object model)
     {
         var mutablePropInfos =
             existingDomain
@@ -16,7 +17,8 @@ public static class DomainExtensions
 
         foreach (var propInfo in mutablePropInfos)
         {
-            var newPropValue = propInfo.GetValue(newerDomain);
+            var propInfoFromModel = modelType.GetProperty(propInfo.Name);
+            var newPropValue = propInfoFromModel.GetValue(model);
 
             if (newPropValue is null
                 || newPropValue == default
@@ -27,5 +29,19 @@ public static class DomainExtensions
 
             propInfo.SetValue(existingDomain, newPropValue);
         }
+    }
+
+    public static void Update<TKey, TModel>(
+        this IDomain<TKey> existingDomain,
+        TModel model)
+    {
+        existingDomain.Update(typeof(TModel), model);
+    }
+
+    public static void Update<TKey>(
+        this IDomain<TKey> existingDomain,
+        IDomain<TKey> model)
+    {
+        existingDomain.Update(typeof(IDomain<TKey>), model);
     }
 }

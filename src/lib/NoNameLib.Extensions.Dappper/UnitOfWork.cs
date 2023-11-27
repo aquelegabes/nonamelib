@@ -1,8 +1,6 @@
 ﻿namespace NoNameLib.Extensions.Dappper;
 
-public sealed class UnitOfWork :
-    IUnitOfWork,
-    IDisposable
+public sealed class UnitOfWork : IUnitOfWork
 {
     internal readonly DbSession _dbSession;
     private bool disposedValue;

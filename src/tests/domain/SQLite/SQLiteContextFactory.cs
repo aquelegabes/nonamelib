@@ -6,7 +6,7 @@ namespace NoNameLib.Domain.Tests.SQLite
     {
         public SQLiteContext CreateDbContext(string[] args)
         {
-            return new SQLiteContext(MainTestingObject.GetConnectionString());
+            return new SQLiteContext(DomainTestingObject.GetConnectionString());
         }
     }
 }

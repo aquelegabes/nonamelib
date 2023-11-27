@@ -5,7 +5,7 @@ public class CommandTest
     [Fact]
     public void PassingTest_AddNewDomain()
     {
-        var testList = new MainTestingObject();
+        var testList = new DomainTestingObject();
         var newDomain = new TestDomain("Alexandre Santos", new DateTime(year: 1998, month: 9, day: 4))
         {
             ContractDate = DateTime.Now,
@@ -26,7 +26,7 @@ public class CommandTest
     [Fact]
     public void PassingTest_AddNewDomainAndNotify()
     {
-        var testList = new MainTestingObject();
+        var testList = new DomainTestingObject();
         var newDomain = new TestDomain("Alexandre Santos", new DateTime(year: 1998, month: 9, day: 4))
         {
             ContractDate = DateTime.Now,

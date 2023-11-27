@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
-using NoNameLib.Api.Interfaces;
 using NoNameLib.Domain.Interfaces;
 using static NoNameLib.Domain.Utils.TransactionType;
 
 namespace NoNameLib.Api.Commands;
 
-public class BaseDeleteCommandHandler<TDeleteModel, TDomain> :
+public class BaseDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
     Command,
     ICommand<TDeleteModel>
-    where TDeleteModel : class, IIdentifiable
-    where TDomain : class, IIdentifiable
+    where TDeleteModel : class, IDomain<TKey>
+    where TDomain : class, IDomain<TKey>
 {
     protected readonly IRepository<TDomain> _repository;
     protected readonly IUnitOfWork _unitOfWork;
@@ -44,11 +43,11 @@ public class BaseDeleteCommandHandler<TDeleteModel, TDomain> :
     }
 }
 
-public class BaseAsyncDeleteCommandHandler<TDeleteModel, TDomain> :
+public class BaseAsyncDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
     Command,
     IAsyncCommand<TDeleteModel>
-    where TDeleteModel : class, IIdentifiable
-    where TDomain : class, IIdentifiable
+    where TDeleteModel : class, IDomain<TKey>
+    where TDomain : class, IDomain<TKey>
 {
     protected readonly IAsyncRepository<TDomain> _repository;
     protected readonly IAsyncUnitOfWork _unitOfWork;

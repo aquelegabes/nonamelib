@@ -7,7 +7,7 @@ public class QueryTest
     [Fact]
     public void PassingTest_QueryGet()
     {
-        var testList = new MainTestingObject();
+        var testList = new DomainTestingObject();
 
         var queryHandler = new TestDomainQueryHandler(testList);
         var result = queryHandler.Get();
@@ -20,7 +20,7 @@ public class QueryTest
     [Fact]
     public void PassingTest_QueryFilterGetName()
     {
-        var testList = new MainTestingObject();
+        var testList = new DomainTestingObject();
 
         var queryHandler = new TestDomainQueryHandler(testList);
         var filters = new TestDomainFilters() { FullName = "vinicius" };
@@ -33,7 +33,7 @@ public class QueryTest
     [Fact]
     public void PassingTest_QueryFilterGetId()
     {
-        var testList = new MainTestingObject();
+        var testList = new DomainTestingObject();
         var id = "6909c4c9-5ebc-4d34-960a-b78dc91263e6";
 
         var queryHandler = new TestDomainQueryHandler(testList);

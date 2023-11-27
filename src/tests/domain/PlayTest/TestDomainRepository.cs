@@ -5,7 +5,7 @@ public class TestDomainRepository : IRepository<TestDomain>
     private readonly List<TestDomain> _domains;
 
     public TestDomainRepository(
-        MainTestingObject testList)
+        DomainTestingObject testList)
     {
         _domains = testList.TestDomainList;
     }

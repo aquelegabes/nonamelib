@@ -7,31 +7,31 @@ namespace NoNameLib.Domain.Tests.PlayTest;
 [Table(nameof(TestDomain))]
 public class TestDomain : IDomain<string>
 {
-    private readonly Guid _id;
+    private Guid _id;
 
     [Key]
     public string Id
     {
         get { return _id.ToString(); }
-        init { _id = Guid.Parse(value); }
+        set { _id = Guid.Parse(value); }
     }
 
     [Required(AllowEmptyStrings = false)]
     [MutableDataMember]
     [MaxLength(100)]
-    public string FullName { get; init; }
+    public string FullName { get; set; }
 
     [Required]
     [NotDefault]
     [DataType(DataType.DateTime)]
-    public DateTime BirthDate { get; init; }
+    public DateTime BirthDate { get; set; }
 
     [NotNegative]
     [MutableDataMember]
-    public int IntValue { get; init; }
+    public int IntValue { get; set; }
 
     [PersonalIdentification(typeof(IdentificationCPF))]
-    public string CPF { get; init; }
+    public string CPF { get; set; }
 
     [Required]
     [NotDefault]
@@ -39,12 +39,12 @@ public class TestDomain : IDomain<string>
     [Comparison(
         ComparisonType.GreaterThan,
         nameof(ContractDate))]
-    public DateTime BeginDate { get; init; }
+    public DateTime BeginDate { get; set; }
 
     [Required]
     [NotDefault]
     [DataType(DataType.DateTime)]
-    public DateTime ContractDate { get; init; }
+    public DateTime ContractDate { get; set; }
 
     public TestDomain(
         string fullName,

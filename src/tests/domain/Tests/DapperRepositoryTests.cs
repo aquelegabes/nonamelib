@@ -23,10 +23,10 @@ public class DapperRepositoryTests
 
         public DapperTestObjects()
         {
-            using var context = new SQLiteContext(MainTestingObject.GetConnectionString());
+            using var context = new SQLiteContext(DomainTestingObject.GetConnectionString());
             context.Database.Migrate();
 
-            DbConnection = new SqliteConnection(MainTestingObject.GetConnectionString());
+            DbConnection = new SqliteConnection(DomainTestingObject.GetConnectionString());
             DbSession = new DbSession(DbConnection);
             UnityOfWork = new UnitOfWork(DbSession);
 
@@ -51,7 +51,7 @@ public class DapperRepositoryTests
     public void DapperRepository_SaveChanges_Create_OK()
     {
         var dapperObject = new DapperTestObjects();
-        var testingObject = new MainTestingObject();
+        var testingObject = new DomainTestingObject();
         var entity = testingObject.TestDomainList.First();
 
         dapperObject.UnityOfWork.BeginTransaction();

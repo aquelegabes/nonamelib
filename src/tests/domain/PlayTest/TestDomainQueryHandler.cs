@@ -1,18 +1,12 @@
 ﻿namespace NoNameLib.Domain.Tests.PlayTest;
 
-public class TestDomainFilters : QueryFilter
-{
-    public string Id { get; set; }
-    public string FullName { get; set; }
-}
-
-public class TestDomainQueryHandler :
+internal class TestDomainQueryHandler :
     IQuery<TestDomain>,
     IQueryFiltered<TestDomain, TestDomainFilters>
 {
     private readonly List<TestDomain> _domains;
 
-    public TestDomainQueryHandler(MainTestingObject statics)
+    public TestDomainQueryHandler(DomainTestingObject statics)
     {
         _domains = statics.TestDomainList;
     }

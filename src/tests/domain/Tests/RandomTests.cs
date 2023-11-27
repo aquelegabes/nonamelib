@@ -5,7 +5,7 @@ public class RandomTests
     [Fact]
     public void GetConnectionStringTest_OK()
     {
-        var connectionstring = MainTestingObject.GetConnectionString();
+        var connectionstring = DomainTestingObject.GetConnectionString();
 
         Assert.NotNull(connectionstring);
     }

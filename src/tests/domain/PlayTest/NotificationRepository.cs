@@ -4,8 +4,8 @@ public class NotificationRepository : IRepository<NotificationObject>
 {
     private readonly List<NotificationObject> _notifications;
 
-    public NotificationRepository(
-        MainTestingObject testList)
+    internal NotificationRepository(
+        DomainTestingObject testList)
     {
         _notifications = testList.NotificationObjectsList;
     }

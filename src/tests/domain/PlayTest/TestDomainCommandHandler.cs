@@ -2,14 +2,14 @@
 
 namespace NoNameLib.Domain.Tests.PlayTest;
 
-public class AddNewDomainCommandEventArgs : CommandEventArgs
+internal class AddNewDomainCommandEventArgs : CommandEventArgs
 {
     public AddNewDomainCommandEventArgs(object domain) : base(domain)
     {
     }
 }
 
-public class TestDomainCommandHandler
+internal class TestDomainCommandHandler
     : Command, ICommand<TestDomain>
 {
     private readonly IRepository<TestDomain> testDomains;

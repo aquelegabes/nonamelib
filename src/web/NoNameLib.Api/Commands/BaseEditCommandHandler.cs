@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using NoNameLib.Api.Interfaces;
 using NoNameLib.Domain.Interfaces;
+using NoNameLib.Domain.Utils.Extensions;
 using static NoNameLib.Domain.Utils.TransactionType;
 
 namespace NoNameLib.Api.Commands;
 
-public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain> :
+public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
     Command,
     IAsyncCommand<TEditModel>
-    where TEditModel : class, IIdentifiable
-    where TDomain : class, IIdentifiable, IEditable
+    where TEditModel : class, IDomain<TKey>
+    where TDomain : class, IDomain<TKey>
 {
     protected readonly IMapper _mapper;
     protected readonly IAsyncRepository<TDomain> _repository;
@@ -38,12 +38,15 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain> :
         {
             var existingQuery =
                 from existing in await _query.GetAsync(cancellationToken)
-                where existing.Id == model.Id
+                where existing.Id.Equals(model.Id)
                 select existing;
 
             var existingDomain = existingQuery.FirstOrDefault();
 
-            existingDomain.Edit(model);
+            if (existingDomain is null)
+                throw new NullReferenceException(nameof(existingDomain));
+
+            existingDomain.Update(model);
 
             var savedRows = await _repository.SaveChangesAsync(existingDomain, Update, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
@@ -57,11 +60,11 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain> :
     }
 }
 
-public abstract class BaseEditCommandHandler<TModel, TDomain> :
+public abstract class BaseEditCommandHandler<TModel, TDomain, TKey> :
     Command,
     ICommand<TModel>
-    where TModel : class, IIdentifiable
-    where TDomain : class, IEditable, IIdentifiable
+    where TModel : class, IDomain<TKey>
+    where TDomain : class, IDomain<TKey>
 {
     protected readonly IRepository<TDomain> _repository;
     protected readonly IUnitOfWork _unitOfWork;
@@ -88,12 +91,15 @@ public abstract class BaseEditCommandHandler<TModel, TDomain> :
         {
             var existingQuery =
                 from existing in _query.Get()
-                where existing.Id == model.Id
+                where existing.Id.Equals(model.Id)
                 select existing;
 
             var existingDomain = existingQuery.FirstOrDefault();
 
-            existingDomain.Edit(model);
+            if (existingDomain is null)
+                throw new NullReferenceException(nameof(existingDomain));
+
+            existingDomain.Update(model);
 
             var savedRows = _repository.SaveChanges(existingDomain, Update);
             _unitOfWork.Commit();

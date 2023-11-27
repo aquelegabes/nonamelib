@@ -3,8 +3,8 @@
 public class AuditsRepository : IRepository<Auditable<TestDomain>>
 {
     private readonly List<Auditable<TestDomain>> _auditable;
-    public AuditsRepository(
-        MainTestingObject testList)
+    internal AuditsRepository(
+        DomainTestingObject testList)
     {
         _auditable = testList.AuditableList;
     }

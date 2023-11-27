@@ -58,9 +58,10 @@ public abstract class DapperRepository<TDomain, TKey> :
         {
             var key = propertyName;
             var propInfo = DomainPropertyInfosOrderedByName
-                    .Single(prop => prop.Name == propertyName
-                                                    && !prop.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), true)
-                                                            .Any());
+                    .Single(prop =>
+                        prop.Name == propertyName
+                        && !prop.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), true).Any());
+
             var value = propInfo.GetValue(domain);
 
             if (value == null) { continue; }
@@ -71,7 +72,7 @@ public abstract class DapperRepository<TDomain, TKey> :
 
         var sql =
 @$"INSERT INTO {typeof(TDomain).Name} ({string.Join(',', fieldNames)})
-VALUES ({string.Join(',', fieldNames.Select(_ => "@"+_))})";
+VALUES ({string.Join(',', fieldNames.Select(_ => "@" + _))})";
 
         var cm = new CommandDefinition(sql, parameters, _dbSession.Transaction);
         return _dbSession.DbConnection.Execute(cm);
@@ -88,9 +89,9 @@ VALUES ({string.Join(',', fieldNames.Select(_ => "@"+_))})";
         {
             var key = propertyName;
             var propInfo = DomainPropertyInfosOrderedByName
-                    .FirstOrDefault(prop => prop.Name == propertyName
-                                                    && prop.GetCustomAttributes(typeof(MutableDataMemberAttribute), true)
-                                                            .Any());
+                    .FirstOrDefault(prop => 
+                        prop.Name == propertyName
+                        && prop.GetCustomAttributes(typeof(MutableDataMemberAttribute), true).Any());
 
             if (propInfo is null) continue;
 
