@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using NoNameLib.Domain.Interfaces;
-using static NoNameLib.Domain.Utils.TransactionType;
+using static NoNameLib.Domain.Enums.TransactionType;
 
 namespace NoNameLib.Api.Commands;
 
 public abstract class BaseAsyncCreateCommandHandler<TCreateModel, TDomain> :
-    Command,
     IAsyncCommand<TCreateModel>
     where TCreateModel : class
     where TDomain : class
@@ -45,7 +44,6 @@ public abstract class BaseAsyncCreateCommandHandler<TCreateModel, TDomain> :
 }
 
 public abstract class BaseCreateCommandHandler<TModel, TDomain> :
-    Command,
     ICommand<TModel>
     where TModel : class
     where TDomain : class

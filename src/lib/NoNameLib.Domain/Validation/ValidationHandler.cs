@@ -2,9 +2,9 @@
 
 namespace NoNameLib.Domain.Validation;
 
-public static class ValidationHandler
+internal static class ValidationHandler
 {
-    public static void Validate<TDomain>(
+    internal static void Validate<TDomain>(
         TDomain domain)
         where TDomain : class
     {

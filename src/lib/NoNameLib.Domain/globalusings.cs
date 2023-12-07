@@ -4,4 +4,6 @@ global using System.Collections;
 global using NoNameLib.Domain;
 global using NoNameLib.Domain.Interfaces;
 global using NoNameLib.Domain.Utils;
-global using NoNameLib.Domain.Utils.Exceptions;
+global using NoNameLib.Domain.Exceptions;
+global using NoNameLib.Domain.Extensions;
+global using NoNameLib.Domain.Enums;

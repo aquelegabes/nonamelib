@@ -1,7 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using NoNameLib.Domain.Enums;
+using NoNameLib.Domain.Extensions;
 using NoNameLib.Domain.Tests.SQLite;
-using NoNameLib.Domain.Utils.Extensions;
 using NoNameLib.Extensions.Dappper;
 using System.Data;
 using System.Data.Common;

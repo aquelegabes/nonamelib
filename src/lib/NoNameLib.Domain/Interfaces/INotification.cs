@@ -2,6 +2,6 @@
 {
     public interface INotification
     {
-        void Notify(object sender, CommandEventArgs e);
+        void Notify(object sender, NotifiableEventArgs e);
     }
 }

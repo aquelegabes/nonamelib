@@ -1,4 +1,7 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿using NoNameLib.Domain.Enums;
+using NoNameLib.Domain.Extensions;
+
+namespace NoNameLib.Domain.Tests.PlayTest;
 
 public class TestDomainRepository : IRepository<TestDomain>
 {
@@ -21,7 +24,7 @@ public class TestDomainRepository : IRepository<TestDomain>
 
     public int SaveChanges(TestDomain domain, TransactionType eventType)
     {
-        ValidationHandler.Validate(domain);
+        domain.Validate();
         _domains.Add(domain);
         return 1;
     }

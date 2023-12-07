@@ -1,4 +1,6 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿using NoNameLib.Domain.Enums;
+
+namespace NoNameLib.Domain.Tests.PlayTest;
 
 public class AuditsRepository : IRepository<Auditable<TestDomain>>
 {
@@ -20,7 +22,6 @@ public class AuditsRepository : IRepository<Auditable<TestDomain>>
 
     public int SaveChanges(Auditable<TestDomain> domain, TransactionType eventType)
     {
-        ValidationHandler.Validate(domain);
         _auditable.Add(domain);
         return 1;
     }

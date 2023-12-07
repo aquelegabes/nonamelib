@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Domain.Utils.Exceptions;
+﻿namespace NoNameLib.Domain.Exceptions;
 
 public class InvalidAttributeUsageException : Exception
 {

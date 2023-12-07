@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Extensions.Dappper.Extensions;
+﻿namespace NoNameLib.Domain.Extensions;
 
 public static class RepositoryExtensions
 {
@@ -38,10 +38,11 @@ public static class AsyncRepositoryExtensions
             Array.Fill(tasks, result);
         }
 
-        return new Task<int>(() => {
+        return new Task<int>(() =>
+        {
             var result = Task.WhenAll(tasks).Result;
             affectedRows = result.Sum();
             return affectedRows;
-        },cancellationToken);
+        }, cancellationToken);
     }
 }

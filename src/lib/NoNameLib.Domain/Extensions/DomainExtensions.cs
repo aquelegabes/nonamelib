@@ -1,6 +1,6 @@
 ﻿using NoNameLib.Domain.Validation;
 
-namespace NoNameLib.Domain.Utils.Extensions;
+namespace NoNameLib.Domain.Extensions;
 
 public static class DomainExtensions
 {
@@ -44,4 +44,7 @@ public static class DomainExtensions
     {
         existingDomain.Update(typeof(IDomain<TKey>), model);
     }
+
+    public static void Validate<TKey>(
+        this IDomain<TKey> domain) => ValidationHandler.Validate(domain);
 }

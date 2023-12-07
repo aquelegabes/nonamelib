@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace NoNameLib.Domain.Utils.Extensions;
+namespace NoNameLib.Domain.Extensions;
 
 public static class StringExtensions
 {
@@ -8,7 +8,7 @@ public static class StringExtensions
         this string json,
         JsonSerializerOptions options = null)
         where T : class
-            => FromJson(json, typeof(T), options) as T;
+            => json.FromJson(typeof(T), options) as T;
 
     public static object FromJson(
         this string json,

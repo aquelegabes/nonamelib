@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
+using NoNameLib.Domain.Extensions;
 using NoNameLib.Domain.Interfaces;
-using NoNameLib.Domain.Utils.Extensions;
-using static NoNameLib.Domain.Utils.TransactionType;
+using static NoNameLib.Domain.Enums.TransactionType;
 
 namespace NoNameLib.Api.Commands;
 
 public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
-    Command,
     IAsyncCommand<TEditModel>
     where TEditModel : class, IDomain<TKey>
     where TDomain : class, IDomain<TKey>
@@ -61,7 +60,6 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
 }
 
 public abstract class BaseEditCommandHandler<TModel, TDomain, TKey> :
-    Command,
     ICommand<TModel>
     where TModel : class, IDomain<TKey>
     where TDomain : class, IDomain<TKey>

@@ -1,4 +1,6 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿using NoNameLib.Domain.Enums;
+
+namespace NoNameLib.Domain.Tests.PlayTest;
 
 internal class OnAddNewDomainNotification : INotification
 {
@@ -11,13 +13,13 @@ internal class OnAddNewDomainNotification : INotification
     }
 
     public void Notify(
-        object sender, CommandEventArgs e)
+        object sender, NotifiableEventArgs e)
     {
         _notificationRepository.SaveChanges(
             new NotificationObject()
             {
                 Id = Guid.NewGuid().ToString(),
-                Object = e.GetDomain()
+                Object = e.GetData()
             },TransactionType.Create);
     }
 }

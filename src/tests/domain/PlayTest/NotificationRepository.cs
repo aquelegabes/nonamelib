@@ -1,4 +1,6 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿using NoNameLib.Domain.Enums;
+
+namespace NoNameLib.Domain.Tests.PlayTest;
 
 public class NotificationRepository : IRepository<NotificationObject>
 {
@@ -21,7 +23,6 @@ public class NotificationRepository : IRepository<NotificationObject>
 
     public int SaveChanges(NotificationObject domain, TransactionType eventType)
     {
-        ValidationHandler.Validate(domain);
         _notifications.Add(domain);
         return 1;
     }

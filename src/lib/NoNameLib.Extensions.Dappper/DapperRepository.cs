@@ -1,6 +1,8 @@
 ﻿#pragma warning disable CS8604 // Possible null reference argument.
 using System.Reflection;
 using System.Runtime.Serialization;
+using NoNameLib.Domain.Enums;
+using NoNameLib.Domain.Extensions;
 using NoNameLib.Domain.Validation;
 
 namespace NoNameLib.Extensions.Dappper;
@@ -11,16 +13,14 @@ public abstract class DapperRepository<TDomain, TKey> :
     where TDomain : class, IDomain<TKey>
     where TKey : class
 {
-    protected bool disposing = false;
     private bool disposedValue;
 
+    protected bool disposing = false;
     protected readonly DbSession _dbSession;
-
     protected string[] DomainPropertyNames =>
         DomainPropertyInfosOrderedByName.Select(prop => prop.Name).ToArray();
     protected IOrderedEnumerable<PropertyInfo>? DomainPropertyInfosOrderedByName =>
         typeof(TDomain).GetProperties().OrderBy(prop => prop.Name);
-
 
     protected DapperRepository(
         DbSession dbSession)
@@ -28,29 +28,9 @@ public abstract class DapperRepository<TDomain, TKey> :
         _dbSession = dbSession;
     }
 
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposedValue)
-        {
-            if (disposing)
-            {
-                _dbSession.Dispose();
-            }
-
-            disposedValue = true;
-        }
-    }
-
-    public void Dispose()
-    {
-        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
-    }
-
     protected virtual int Create(TDomain domain)
     {
-        ValidationHandler.Validate(domain);
+        domain.Validate();
         Dictionary<string, object> parameters = new();
         List<string> fieldNames = new();
 
@@ -80,7 +60,7 @@ VALUES ({string.Join(',', fieldNames.Select(_ => "@" + _))})";
 
     protected virtual int Update(TDomain domain)
     {
-        ValidationHandler.Validate(domain);
+        domain.Validate();
         Dictionary<string, object> parameters = new();
         List<string> fieldNames = new();
 
@@ -89,7 +69,7 @@ VALUES ({string.Join(',', fieldNames.Select(_ => "@" + _))})";
         {
             var key = propertyName;
             var propInfo = DomainPropertyInfosOrderedByName
-                    .FirstOrDefault(prop => 
+                    .FirstOrDefault(prop =>
                         prop.Name == propertyName
                         && prop.GetCustomAttributes(typeof(MutableDataMemberAttribute), true).Any());
 
@@ -115,20 +95,6 @@ WHERE Id = @Id";
         return _dbSession.DbConnection.Execute(cm);
     }
 
-    public int SaveChanges(TDomain domain, TransactionType eventType)
-    {
-        var affectedRows = eventType switch
-        {
-            TransactionType.Update => Update(domain),
-            TransactionType.Create => Create(domain),
-            TransactionType.Delete => Delete(domain),
-            _ => 0,
-        };
-
-        _dbSession.LastTransactionAffectedRows += affectedRows;
-        return affectedRows;
-    }
-
     protected virtual int Delete(TDomain domain)
     {
         string sql = $"DELETE FROM {nameof(TDomain)} WHERE Id = @Id";
@@ -146,5 +112,39 @@ WHERE Id = @Id";
         return _dbSession.DbConnection.Query<TDomain>(sql).AsQueryable();
     }
 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                _dbSession.Dispose();
+            }
+
+            disposedValue = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
     public IQueryable<TDomain> Get() => GetAll();
+
+    public int SaveChanges(TDomain domain, TransactionType eventType)
+    {
+        var affectedRows = eventType switch
+        {
+            TransactionType.Update => Update(domain),
+            TransactionType.Create => Create(domain),
+            TransactionType.Delete => Delete(domain),
+            _ => 0,
+        };
+
+        _dbSession.LastTransactionAffectedRows += affectedRows;
+        return affectedRows;
+    }
 }

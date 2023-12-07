@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using NoNameLib.Domain.Interfaces;
-using static NoNameLib.Domain.Utils.TransactionType;
+using static NoNameLib.Domain.Enums.TransactionType;
 
 namespace NoNameLib.Api.Commands;
 
 public class BaseDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
-    Command,
     ICommand<TDeleteModel>
     where TDeleteModel : class, IDomain<TKey>
     where TDomain : class, IDomain<TKey>
@@ -44,7 +43,6 @@ public class BaseDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
 }
 
 public class BaseAsyncDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
-    Command,
     IAsyncCommand<TDeleteModel>
     where TDeleteModel : class, IDomain<TKey>
     where TDomain : class, IDomain<TKey>

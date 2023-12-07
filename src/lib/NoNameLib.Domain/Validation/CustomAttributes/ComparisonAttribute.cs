@@ -6,10 +6,8 @@ namespace NoNameLib.Domain.Validation;
 public class ComparisonAttribute : ValidationAttribute
 {
     private readonly ComparisonType _comparisonType;
-
     private readonly string _fieldNameToCompare1;
     private readonly string _fieldNameToCompare2;
-
     private object _fullObject;
 
     public ComparisonAttribute(
@@ -42,7 +40,8 @@ public class ComparisonAttribute : ValidationAttribute
                 .GetType()
                 .GetProperties()
                 .Single(prop => prop.Name.Equals(_fieldNameToCompare2))
-                .GetValue(_fullObject);
+                .GetValue(_fullObject)
+                ?? throw new MemberAccessException($"Object does not contain a member named: {_fieldNameToCompare2}");
         }
 
         return BooleanResolver.ResolveConditional(

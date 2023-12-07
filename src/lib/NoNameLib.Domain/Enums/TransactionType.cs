@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Domain.Utils;
+﻿namespace NoNameLib.Domain.Enums;
 
 public enum TransactionType
 {

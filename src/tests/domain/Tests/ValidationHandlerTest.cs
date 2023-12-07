@@ -1,5 +1,5 @@
+using NoNameLib.Domain.Extensions;
 using NoNameLib.Domain.Tests.PlayTest;
-using NoNameLib.Domain.Utils.Extensions;
 using System.ComponentModel.DataAnnotations;
 
 namespace NoNameLib.Domain.Tests.Tests;
@@ -17,7 +17,7 @@ public class ValidationHandlerTest
                 BeginDate = DateTime.Now.AddDays(1),
             };
 
-        ValidationHandler.Validate(objectToValidate);
+        objectToValidate.Validate();
 
         // assert
         Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
@@ -36,7 +36,7 @@ public class ValidationHandlerTest
             BeginDate = DateTime.Now.AddDays(1),
         };
 
-        ValidationHandler.Validate(objectToValidate);
+        objectToValidate.Validate();
 
         Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
@@ -55,7 +55,7 @@ public class ValidationHandlerTest
             BeginDate = DateTime.Now.AddDays(1),
         };
 
-        ValidationHandler.Validate(objectToValidate);
+        objectToValidate.Validate();
 
         Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
@@ -73,7 +73,7 @@ public class ValidationHandlerTest
         };
 
         // assert
-        Assert.Throws<ValidationException>(() => ValidationHandler.Validate(objectToValidate));
+        Assert.Throws<ValidationException>(() => objectToValidate.Validate());
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public class ValidationHandlerTest
         var objectToValidate = new TestDomain("", default);
 
         // assert
-        var exc = Assert.Throws<AggregateException>(() => ValidationHandler.Validate(objectToValidate));
+        var exc = Assert.Throws<AggregateException>(() => objectToValidate.Validate());
         Assert.True(exc.InnerExceptions.Count > 1);
     }
 
@@ -101,7 +101,7 @@ public class ValidationHandlerTest
         };
 
         // assert
-        Assert.Throws<ValidationException>(() => ValidationHandler.Validate(objectToValidate));
+        Assert.Throws<ValidationException>(() => objectToValidate.Validate());
     }
 
     [Fact]
@@ -117,7 +117,7 @@ public class ValidationHandlerTest
             BeginDate = DateTime.Now.AddDays(1),
         };
 
-        Assert.Throws<ValidationException>(() => ValidationHandler.Validate(objectToValidate));
+        Assert.Throws<ValidationException>(() => objectToValidate.Validate());
 
         Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
@@ -135,7 +135,7 @@ public class ValidationHandlerTest
             BeginDate = DateTime.Now.AddDays(1),
         };
 
-        ValidationHandler.Validate(objectToValidate);
+        objectToValidate.Validate();
 
         Assert.True(objectToValidate.BeginDate >= objectToValidate.ContractDate);
     }
