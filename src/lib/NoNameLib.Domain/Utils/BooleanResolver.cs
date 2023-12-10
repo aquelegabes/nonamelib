@@ -50,7 +50,8 @@ public static class BooleanResolver
             throw new ArgumentNullException(nameof(source1), "Object source must not be null.");
 
         if (comparisonType == ComparisonType.Between && source1 is null && source2 is null)
-            throw new ArgumentException("When comparison type equals \"ComparisonType.Between\" both source objects must not be null");
+            throw new ArgumentException(
+                        "When comparison type equals \"ComparisonType.Between\" both source objects must not be null");
 
         if (!type.GetInterfaces().Contains(typeof(IComparable)))
             throw new TypeAccessException($"Type : '{nameof(type)}' does not implements {nameof(IComparable)}.");
@@ -106,7 +107,9 @@ public static class BooleanResolver
         if (@operator == default)
             throw new ArgumentException("Invalid operator.", nameof(@operator));
         if (conditions?.Any() == false)
-            throw new ArgumentNullException(paramName: nameof(conditions), message: "At least one condition must be specified.");
+            throw new ArgumentNullException(
+                        paramName: nameof(conditions),
+                        message: "At least one condition must be specified.");
 
         bool? result = null;
         foreach (var condition in conditions)

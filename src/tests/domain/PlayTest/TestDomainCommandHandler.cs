@@ -5,13 +5,6 @@ using NoNameLib.Domain.Enums;
 
 namespace NoNameLib.Domain.Tests.PlayTest;
 
-internal class AddNewDomainCommandEventArgs : NotifiableEventArgs
-{
-    public AddNewDomainCommandEventArgs(object domain) : base(domain)
-    {
-    }
-}
-
 internal class TestDomainCommandHandler :
     Notifiable,
     ICommand<TestDomain>
@@ -41,12 +34,10 @@ internal class TestDomainCommandHandler :
         audits.SaveChanges(audit, TransactionType.Create);
     }
 
-    public TestDomain Handle(TestDomain domain)
+    public void Handle(TestDomain domain)
     {
         OnBeforeHandle(new AddNewDomainCommandEventArgs(domain));
 
         testDomains.SaveChanges(domain, TransactionType.Create);
-
-        return domain;
     }
 }

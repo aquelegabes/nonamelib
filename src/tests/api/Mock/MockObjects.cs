@@ -2,8 +2,6 @@
 using Moq;
 using NoNameLib.Api.Tests.PlayTest;
 using NoNameLib.Domain.Interfaces;
-using NoNameLib.Domain.Tests.PlayTest;
-using System.Security.Cryptography;
 
 namespace NoNameLib.Api.Tests.Mock
 {

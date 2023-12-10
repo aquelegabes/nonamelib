@@ -9,10 +9,10 @@ public abstract class NotifiableEventArgs : EventArgs
         this._data = data;
     }
 
-    public TDomain GetData<TDomain>()
-        where TDomain : class
+    public T GetData<T>()
+        where T : class
     {
-        return _data as TDomain;
+        return _data as T;
     }
 
     public object GetData()

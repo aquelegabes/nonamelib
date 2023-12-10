@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NoNameLib.Application\NoNameLib.Application.csproj" />
+    <ProjectReference Include="..\NoNameLib.Domain\NoNameLib.Domain.csproj" />
   </ItemGroup>
 
 </Project>

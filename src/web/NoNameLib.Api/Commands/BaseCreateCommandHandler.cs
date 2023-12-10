@@ -23,7 +23,7 @@ public abstract class BaseAsyncCreateCommandHandler<TCreateModel, TDomain> :
         _unitOfWork = unitOfWork;
     }
 
-    public virtual async Task<TCreateModel> HandleAsync(
+    public virtual async Task Handle(
         TCreateModel model,
         CancellationToken cancellationToken = default)
     {
@@ -33,7 +33,6 @@ public abstract class BaseAsyncCreateCommandHandler<TCreateModel, TDomain> :
         {
             var savedRows = await _repository.SaveChangesAsync(domain, Create, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return _mapper.Map<TCreateModel>(domain);
         }
         catch
         {
@@ -62,7 +61,7 @@ public abstract class BaseCreateCommandHandler<TModel, TDomain> :
         this._mapper = _mapper;
     }
 
-    public virtual TModel Handle(TModel model)
+    public virtual void Handle(TModel model)
     {
         var domain = _mapper.Map<TDomain>(model);
         _unitOfWork.BeginTransaction();
@@ -70,7 +69,6 @@ public abstract class BaseCreateCommandHandler<TModel, TDomain> :
         {
             var savedRows = _repository.SaveChanges(domain, Create);
             _unitOfWork.Commit();
-            return _mapper.Map<TModel>(domain);
         }
         catch
         {

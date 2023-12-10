@@ -31,9 +31,8 @@ public class CreateCommandHandlerTests
                 uowMock.Object,
                 mapper);
 
-        var result = tdCHandler.Handle(newModel);
+        tdCHandler.Handle(newModel);
 
-        Assert.NotNull(result);
         Assert.True(domainsCount + 1 == testList.TestDomainList.Count);
 
         uowMock.Verify(

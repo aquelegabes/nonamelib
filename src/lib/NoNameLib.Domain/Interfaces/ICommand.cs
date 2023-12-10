@@ -1,13 +1,27 @@
 ﻿namespace NoNameLib.Domain.Interfaces;
 
-public interface ICommand<TDomain>
+public interface ICommand<TDomain, TResult> : IBaseCommand
     where TDomain : class
 {
-    TDomain Handle(TDomain domain);
+    TResult Handle(TDomain domain);
 }
 
-public interface IAsyncCommand<TDomain>
+public interface IAsyncCommand<TDomain, TResult> : IBaseCommand
     where TDomain : class
 {
-    Task<TDomain> HandleAsync(TDomain domain, CancellationToken cancellationToken = default);
+    Task<TResult> Handle(TDomain domain, CancellationToken cancellationToken);
 }
+
+public interface ICommand<TDomain> : IBaseCommand
+    where TDomain : class
+{
+    void Handle(TDomain domain);
+}
+
+public interface IAsyncCommand<TDomain> : IBaseCommand
+    where TDomain : class
+{
+    Task Handle(TDomain domain, CancellationToken cancellationToken = default);
+}
+
+public interface IBaseCommand { }

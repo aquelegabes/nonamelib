@@ -23,7 +23,7 @@ public class BaseDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
         _mapper = mapper;
     }
 
-    public TDeleteModel Handle(TDeleteModel model)
+    public void Handle(TDeleteModel model)
     {
         var domain = _mapper.Map<TDomain>(model);
         _unitOfWork.BeginTransaction();
@@ -32,7 +32,6 @@ public class BaseDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
         {
             _repository.SaveChanges(domain, Delete);
             _unitOfWork.Commit();
-            return _mapper.Map<TDeleteModel>(domain);
         }
         catch
         {
@@ -61,7 +60,7 @@ public class BaseAsyncDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
         _mapper = mapper;
     }
 
-    public async Task<TDeleteModel> HandleAsync(
+    public async Task Handle(
         TDeleteModel model,
         CancellationToken cancellationToken)
     {
@@ -72,7 +71,6 @@ public class BaseAsyncDeleteCommandHandler<TDeleteModel, TDomain, TKey> :
         {
             await _repository.SaveChangesAsync(domain, Delete, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return _mapper.Map<TDeleteModel>(domain);
         }
         catch
         {

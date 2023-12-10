@@ -32,6 +32,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Api", "src\web\No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Api.Tests", "src\tests\api\NoNameLib.Api.Tests.csproj", "{29054CD0-A998-469D-AB92-36A822D8C23B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{BF968A8F-82EB-40C1-9F4F-BEC4C31194D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoNameLib.Application", "src\lib\NoNameLib.Application\NoNameLib.Application.csproj", "{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{719824C4-E3B9-4B7D-A0FE-DE5CFEE6D8AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +68,10 @@ Global
 		{29054CD0-A998-469D-AB92-36A822D8C23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29054CD0-A998-469D-AB92-36A822D8C23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29054CD0-A998-469D-AB92-36A822D8C23B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +83,7 @@ Global
 		{AAD4CD4A-5C45-42EA-BE92-4FADC0A177F7} = {34B2ADB3-BC52-4139-9EEC-42DEA809275B}
 		{3E7331C9-607E-4614-93CA-5B18B8AB0F5D} = {517E870C-2E15-4399-AEF2-BF1DD6A47BCB}
 		{29054CD0-A998-469D-AB92-36A822D8C23B} = {CBEB27DC-D6CA-434B-92E5-F9B8A2301E5A}
+		{759E80F5-C529-4B1C-B73B-3BFCFCB384FF} = {BF968A8F-82EB-40C1-9F4F-BEC4C31194D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA4F2930-2AC9-4A63-B31F-7FBE68F0CFC2}

@@ -55,6 +55,9 @@ public class ComparisonAttribute : ValidationAttribute
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
         _fullObject = validationContext.ObjectInstance;
-        return IsValid(value) ? ValidationResult.Success : new ValidationResult("Could not resolve the comparison between requested values");
+
+        return IsValid(value) ?
+            ValidationResult.Success
+            : new ValidationResult("Could not resolve the comparison between requested values");
     }
 }

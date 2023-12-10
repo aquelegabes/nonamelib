@@ -16,9 +16,8 @@ public class CommandTest
         var tdCHandler =
             new TestDomainCommandHandler(new TestDomainRepository(testList), new AuditsRepository(testList));
 
+        tdCHandler.Handle(newDomain);
 
-        var result = tdCHandler.Handle(newDomain);
-        Assert.NotNull(result);
         Assert.True(domainsCount + 1 == testList.TestDomainList.Count);
         Assert.NotEmpty(testList.AuditableList);
     }
@@ -40,9 +39,8 @@ public class CommandTest
 
         var domainsCount = testList.TestDomainList.Count;
 
-        var result = tdCHandler.Handle(newDomain);
+        tdCHandler.Handle(newDomain);
 
-        Assert.NotNull(result);
         Assert.True(domainsCount + 1 == testList.TestDomainList.Count);
         Assert.NotNull(testList.NotificationObjectsList);
         Assert.NotEmpty(testList.AuditableList);

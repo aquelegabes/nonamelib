@@ -27,7 +27,7 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
         _query = query;
     }
 
-    public virtual async Task<TEditModel> HandleAsync(
+    public virtual async Task Handle(
         TEditModel model,
         CancellationToken cancellationToken = default)
     {
@@ -49,7 +49,6 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
 
             var savedRows = await _repository.SaveChangesAsync(existingDomain, Update, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
-            return _mapper.Map<TEditModel>(existingDomain);
         }
         catch
         {
@@ -81,7 +80,7 @@ public abstract class BaseEditCommandHandler<TModel, TDomain, TKey> :
         _query = query;
     }
 
-    public virtual TModel Handle(TModel model)
+    public virtual void Handle(TModel model)
     {
         _unitOfWork.BeginTransaction();
 
@@ -101,7 +100,6 @@ public abstract class BaseEditCommandHandler<TModel, TDomain, TKey> :
 
             var savedRows = _repository.SaveChanges(existingDomain, Update);
             _unitOfWork.Commit();
-            return _mapper.Map<TModel>(existingDomain);
         }
         catch
         {
