@@ -36,7 +36,7 @@ public abstract class BaseAsyncEditCommandHandler<TEditModel, TDomain, TKey> :
         try
         {
             var existingQuery =
-                from existing in await _query.GetAsync(cancellationToken)
+                from existing in await _query.Get(cancellationToken)
                 where existing.Id.Equals(model.Id)
                 select existing;
 

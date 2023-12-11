@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDispatcher(ServiceLifetime.Scoped);
 builder.Services.RegisterCommandsFromAssembly(typeof(Program).Assembly, ServiceLifetime.Scoped);
+builder.Services.RegisterQueriesFromAssembly(typeof(Program).Assembly, ServiceLifetime.Scoped);
 
 var app = builder.Build();
 

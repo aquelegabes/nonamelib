@@ -8,7 +8,8 @@ namespace NoNameLib.Api.Commands
         public string Name { get; set; }
         public string Id => Guid.NewGuid().ToString();
     }
-    public class DispatcherCommandHandler :
+
+    public class OutputTestCommandHandler :
         ICommand<InputTest>,
         ICommand<InputTest, string>,
         IAsyncCommand<InputTest, OutputTest>

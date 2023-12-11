@@ -8,6 +8,56 @@ namespace NoNameLib.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
+    #region Private
+    private static IEnumerable<Type> GetImplementedTypes(
+        Assembly assembly,
+        Type baseType)
+    {
+        return
+           from type in assembly.GetTypes()
+           where type.IsAssignableTo(baseType)
+                   && type.IsPublic
+                   && type.IsClass
+                   && !type.IsAbstract
+                   && !type.IsGenericType
+           select type;
+    }
+
+    private static void RegisterGivenTypes(
+        IServiceCollection sc,
+        ServiceLifetime lifetime,
+        IEnumerable<Type> implementedTypes,
+        string[] typeNames)
+    {
+        Parallel.ForEach(implementedTypes, implementedType =>
+        {
+            var interfaceTypes =
+                from interfaceType in implementedType.GetInterfaces()
+                where typeNames.Contains(interfaceType.Name)
+                select interfaceType;
+
+            if (!interfaceTypes.Any())
+                return;
+
+            foreach (var interfaceType in interfaceTypes)
+            {
+                switch (lifetime)
+                {
+                    case ServiceLifetime.Singleton:
+                        sc.AddSingleton(interfaceType, implementedType);
+                        break;
+                    case ServiceLifetime.Scoped:
+                        sc.AddScoped(interfaceType, implementedType);
+                        break;
+                    case ServiceLifetime.Transient:
+                        sc.AddTransient(interfaceType, implementedType);
+                        break;
+                }
+            }
+        });
+    }
+    #endregion Private
+
     public static IServiceCollection AddDispatcher(
         this IServiceCollection sc,
         ServiceLifetime lifetime)
@@ -38,18 +88,9 @@ public static class ServiceCollectionExtensions
         Assembly assembly,
         ServiceLifetime lifetime)
     {
-        var implementedTypes =
-            from type in assembly.GetTypes()
-            where type.IsAssignableTo(typeof(IBaseCommand))
-                    && type.IsPublic
-                    && type.IsClass
-                    && !type.IsAbstract
-                    && !type.IsGenericType
-            select type;
+        var implementedTypes = GetImplementedTypes(assembly, typeof(IBaseCommand));
 
-        Parallel.ForEach(implementedTypes, implementedType =>
-        {
-            var commandNames = new string[]
+        var typeNames = new string[]
             {
                 typeof(ICommand<>).Name,
                 typeof(ICommand<,>).Name,
@@ -57,30 +98,27 @@ public static class ServiceCollectionExtensions
                 typeof (IAsyncCommand<,>).Name,
             };
 
-            var interfaceTypes =
-                from interfaceType in implementedType.GetInterfaces()
-                where commandNames.Contains(interfaceType.Name)
-                select interfaceType;
+        RegisterGivenTypes(sc, lifetime, implementedTypes, typeNames);
 
-            if (!interfaceTypes.Any())
-                return;
+        return sc;
+    }
 
-            foreach (var interfaceType in interfaceTypes)
+    public static IServiceCollection RegisterQueriesFromAssembly(
+        this IServiceCollection sc,
+        Assembly assembly,
+        ServiceLifetime lifetime)
+    {
+        var implementedTypes = GetImplementedTypes(assembly, typeof(IBaseQuery));
+
+        var typeNames = new string[]
             {
-                switch (lifetime)
-                {
-                    case ServiceLifetime.Singleton:
-                        sc.AddSingleton(interfaceType, implementedType);
-                        break;
-                    case ServiceLifetime.Scoped:
-                        sc.AddScoped(interfaceType, implementedType);
-                        break;
-                    case ServiceLifetime.Transient:
-                        sc.AddTransient(interfaceType, implementedType);
-                        break;
-                }
-            }
-        });
+                typeof(IQuery<>).Name,
+                typeof(IAsyncQuery<>).Name,
+                typeof(IQueryFiltered<,>).Name,
+                typeof(IAsyncQueryFiltered<,>).Name,
+            };
+
+        RegisterGivenTypes(sc, lifetime, implementedTypes, typeNames);
 
         return sc;
     }

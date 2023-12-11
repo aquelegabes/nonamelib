@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOC", "IOC", "{5DBA1BDD-13C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CBEB27DC-D6CA-434B-92E5-F9B8A2301E5A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{05063D87-059C-4274-8F9F-A81E5E089402}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Domain.Tests", "src\tests\domain\NoNameLib.Domain.Tests.csproj", "{09C1618C-444C-45D1-B3C8-354A9CD12D55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F9C9E3B-3E16-46FB-BC2E-DE984C11BF9E}"
@@ -34,9 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Api.Tests", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{BF968A8F-82EB-40C1-9F4F-BEC4C31194D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoNameLib.Application", "src\lib\NoNameLib.Application\NoNameLib.Application.csproj", "{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{719824C4-E3B9-4B7D-A0FE-DE5CFEE6D8AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Application", "src\lib\NoNameLib.Application\NoNameLib.Application.csproj", "{759E80F5-C529-4B1C-B73B-3BFCFCB384FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

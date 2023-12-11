@@ -6,9 +6,9 @@ public sealed partial class Dispatcher :
     IResultDispatcher, IAsyncResultDispatcher
 {
     private static readonly string _asyncInterfaceName = typeof(IAsyncCommand<>).Name;
-    private static Type GetServiceType(Type commandType, Type ResultType, bool async = false) => !async ?
-        typeof(ICommand<,>).MakeGenericType(commandType, ResultType)
-        : typeof(IAsyncCommand<,>).MakeGenericType(commandType, ResultType);
+    private static Type GetCommandResultDispatcherServiceType(Type commandType, Type resultType, bool async = false) => !async ?
+        typeof(ICommand<,>).MakeGenericType(commandType, resultType)
+        : typeof(IAsyncCommand<,>).MakeGenericType(commandType, resultType);
 
     DispatchResult IResultDispatcher.Dispatch<TCommand>(
         TCommand command,
@@ -21,7 +21,7 @@ public sealed partial class Dispatcher :
             throw new ArgumentNullException(nameof(resultType));
 
         string commandName = typeof(TCommand).Name;
-        var serviceType = GetServiceType(typeof(TCommand), resultType);
+        var serviceType = GetCommandResultDispatcherServiceType(typeof(TCommand), resultType);
 
         var handler = this._sp.GetService(serviceType)
             ?? throw new HandlerNotImplementedException(
@@ -46,7 +46,7 @@ public sealed partial class Dispatcher :
             throw new ArgumentNullException(nameof(resultType));
 
         string commandName = typeof(TCommand).Name;
-        var serviceType = GetServiceType(typeof(TCommand), resultType, true);
+        var serviceType = GetCommandResultDispatcherServiceType(typeof(TCommand), resultType, true);
 
         var handler = this._sp.GetService(serviceType)
             ?? throw new HandlerNotImplementedException(
