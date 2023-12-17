@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using NoNameLib.Api.Commands;
-using NoNameLib.Domain.Interfaces;
-using NoNameLib.Domain.Tests.PlayTest;
 
-namespace NoNameLib.Api.Tests.PlayTest;
+namespace NoNameLib.Api.Tests.Mock.Handlers;
 
 public class TestDomainDeleteCommandHandler :
     BaseDeleteCommandHandler<TestModel, TestDomain, string>

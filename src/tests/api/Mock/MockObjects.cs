@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using Moq;
-using NoNameLib.Api.Tests.PlayTest;
-using NoNameLib.Domain.Interfaces;
 
 namespace NoNameLib.Api.Tests.Mock
 {
@@ -9,10 +6,7 @@ namespace NoNameLib.Api.Tests.Mock
     {
         public static IMapper GetMapper()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfile()); //your automapperprofile 
-            });
+            var config = new MapperConfiguration(cfg => cfg.AddProfile(new AutoMapperProfile()));
 
             return config.CreateMapper();
         }

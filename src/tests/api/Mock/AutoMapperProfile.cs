@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using NoNameLib.Domain.Tests.PlayTest;
 
-namespace NoNameLib.Api.Tests.PlayTest
+namespace NoNameLib.Api.Tests.Mock
 {
     public class AutoMapperProfile : Profile
     {

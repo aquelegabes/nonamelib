@@ -28,8 +28,4 @@
     <ProjectReference Include="..\domain\NoNameLib.Domain.Tests.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

@@ -1,9 +1,4 @@
-﻿using NoNameLib.Api.Commands;
-using NoNameLib.Api.Controllers;
-using NoNameLib.Domain.Interfaces;
-using System.Runtime.CompilerServices;
-
-namespace NoNameLib.Api.Queries;
+﻿namespace NoNameLib.Api.Tests.Mock.Handlers;
 
 public class OutputTestQueryHandler :
     IQuery<OutputTest>,
@@ -11,7 +6,7 @@ public class OutputTestQueryHandler :
     IQueryFiltered<OutputTest, OutputTestQueryFilter>,
     IAsyncQueryFiltered<OutputTest, OutputTestQueryFilter>
 {
-    private List<OutputTest> Outputs()
+    private static List<OutputTest> Outputs()
     {
         var list = new List<OutputTest>();
 
@@ -53,5 +48,6 @@ public class OutputTestQueryHandler :
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
     }
 }

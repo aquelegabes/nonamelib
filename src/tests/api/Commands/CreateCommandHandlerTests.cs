@@ -1,9 +1,4 @@
-﻿using Moq;
-using NoNameLib.Api.Tests.Mock;
-using NoNameLib.Api.Tests.PlayTest;
-using NoNameLib.Domain.Tests.PlayTest;
-
-namespace NoNameLib.Api.Tests.Commands;
+﻿namespace NoNameLib.Api.Tests.Commands;
 
 public class CreateCommandHandlerTests
 {
