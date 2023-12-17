@@ -24,13 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\web\NoNameLib.Api\NoNameLib.Api.csproj" />
+    <ProjectReference Include="..\..\lib\NoNameLib.Application\NoNameLib.Application.csproj" />
     <ProjectReference Include="..\domain\NoNameLib.Domain.Tests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tests\Commands\InputTestHandlers\" />
-    <Folder Include="Tests\Commands\OutputTestHandlers\" />
   </ItemGroup>
 
 </Project>

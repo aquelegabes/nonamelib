@@ -42,8 +42,7 @@ public partial class DapperRepositoryTests
             DbSession?.Dispose();
             UnityOfWork?.Dispose();
             Repository?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
-
-
 }

@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Extensions.Dapppe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Api", "src\web\NoNameLib.Api\NoNameLib.Api.csproj", "{3E7331C9-607E-4614-93CA-5B18B8AB0F5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Api.Tests", "src\tests\api\NoNameLib.Api.Tests.csproj", "{29054CD0-A998-469D-AB92-36A822D8C23B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoNameLib.Application.Tests", "src\tests\api\NoNameLib.Application.Tests.csproj", "{29054CD0-A998-469D-AB92-36A822D8C23B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{BF968A8F-82EB-40C1-9F4F-BEC4C31194D9}"
 EndProject

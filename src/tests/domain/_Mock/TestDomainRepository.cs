@@ -17,6 +17,7 @@ public class TestDomainRepository : IRepository<TestDomain>
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
     }
 
     public int SaveChanges(TestDomain domain, TransactionType eventType)

@@ -18,7 +18,7 @@ public class ValidationHandlerTests
         objectToValidate.Validate();
 
         // assert
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
     }
 
@@ -36,7 +36,7 @@ public class ValidationHandlerTests
 
         objectToValidate.Validate();
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
     }
 
@@ -55,7 +55,7 @@ public class ValidationHandlerTests
 
         objectToValidate.Validate();
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
         Assert.True(objectToValidate.CPF != null);
     }
@@ -117,7 +117,7 @@ public class ValidationHandlerTests
 
         Assert.Throws<ValidationException>(() => objectToValidate.Validate());
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
         Assert.True(objectToValidate.CPF != null);
     }
