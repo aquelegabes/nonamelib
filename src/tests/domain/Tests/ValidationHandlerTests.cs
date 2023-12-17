@@ -1,10 +1,8 @@
-using NoNameLib.Domain.Extensions;
-using NoNameLib.Domain.Tests.PlayTest;
 using System.ComponentModel.DataAnnotations;
 
-namespace NoNameLib.Domain.Tests.Tests;
+namespace NoNameLib.Domain.Tests;
 
-public class ValidationHandlerTest
+public class ValidationHandlerTests
 {
     [Fact]
     public void PassingTest_ValidateObject()

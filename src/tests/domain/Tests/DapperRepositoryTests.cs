@@ -1,7 +1,4 @@
-﻿using NoNameLib.Domain.Enums;
-using NoNameLib.Domain.Extensions;
-
-namespace NoNameLib.Domain.Tests.Tests;
+﻿namespace NoNameLib.Domain.Tests;
 
 public partial class DapperRepositoryTests
 {

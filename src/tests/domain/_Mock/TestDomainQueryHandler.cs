@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿namespace NoNameLib.Domain.Tests.Mock;
 
 internal class TestDomainQueryHandler :
     IQuery<TestDomain>,

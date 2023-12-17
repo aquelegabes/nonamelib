@@ -1,6 +1,6 @@
-﻿namespace NoNameLib.Domain.Tests.Tests;
+﻿namespace NoNameLib.Domain.Tests;
 
-public class CommandTest
+public class CommandTests
 {
     [Fact]
     public void PassingTest_AddNewDomain()

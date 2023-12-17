@@ -1,10 +1,11 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using NoNameLib.Domain.Tests.SQLite;
-using NoNameLib.Extensions.Dappper;
-using System.Data;
+﻿using System.Data;
 
-namespace NoNameLib.Domain.Tests.Tests;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+
+using NoNameLib.Extensions.Dappper;
+
+namespace NoNameLib.Domain.Tests;
 
 public partial class DapperRepositoryTests
 {

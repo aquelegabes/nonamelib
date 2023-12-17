@@ -1,8 +1,6 @@
-﻿using NoNameLib.Domain.Interfaces;
+﻿namespace NoNameLib.Domain.Tests;
 
-namespace NoNameLib.Domain.Tests.Tests;
-
-public class QueryTest
+public class QueryTests
 {
     [Fact]
     public void PassingTest_QueryGet()

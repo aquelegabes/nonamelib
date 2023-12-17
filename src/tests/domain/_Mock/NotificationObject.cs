@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Domain.Tests.PlayTest;
+﻿namespace NoNameLib.Domain.Tests.Mock;
 
 public class NotificationObject : IDomain<string>
 {

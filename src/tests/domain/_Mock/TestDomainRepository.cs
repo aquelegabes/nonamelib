@@ -1,7 +1,4 @@
-﻿using NoNameLib.Domain.Enums;
-using NoNameLib.Domain.Extensions;
-
-namespace NoNameLib.Domain.Tests.PlayTest;
+﻿namespace NoNameLib.Domain.Tests.Mock;
 
 public class TestDomainRepository : IRepository<TestDomain>
 {

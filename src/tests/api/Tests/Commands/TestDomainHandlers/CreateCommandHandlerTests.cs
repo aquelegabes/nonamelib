@@ -1,4 +1,4 @@
-﻿namespace NoNameLib.Api.Tests.Commands;
+﻿namespace NoNameLib.Api.Tests.Commands.TestDomainHandlers;
 
 public class CreateCommandHandlerTests
 {

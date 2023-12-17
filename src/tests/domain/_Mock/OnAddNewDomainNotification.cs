@@ -1,6 +1,4 @@
-﻿using NoNameLib.Domain.Enums;
-
-namespace NoNameLib.Domain.Tests.PlayTest;
+﻿namespace NoNameLib.Domain.Tests.Mock;
 
 internal class OnAddNewDomainNotification : INotification
 {
