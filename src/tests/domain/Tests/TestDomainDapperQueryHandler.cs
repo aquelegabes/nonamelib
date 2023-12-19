@@ -1,6 +1,4 @@
-﻿using NoNameLib.Domain.Tests.SQLite;
-
-namespace NoNameLib.Domain.Tests.Tests;
+﻿namespace NoNameLib.Domain.Tests;
 
 public class TestDomainDapperQueryHandler :
     IQuery<TestDomain>,

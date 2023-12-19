@@ -1,8 +1,6 @@
-﻿using NoNameLib.Domain.Interfaces;
+﻿namespace NoNameLib.Domain.Tests;
 
-namespace NoNameLib.Domain.Tests.Tests;
-
-public class QueryTest
+public class QueryTests
 {
     [Fact]
     public void PassingTest_QueryGet()
@@ -34,7 +32,7 @@ public class QueryTest
     public void PassingTest_QueryFilterGetId()
     {
         var testList = new DomainTestingObject();
-        var id = "6909c4c9-5ebc-4d34-960a-b78dc91263e6";
+        const string id = "6909c4c9-5ebc-4d34-960a-b78dc91263e6";
 
         var queryHandler = new TestDomainQueryHandler(testList);
         var filters = new TestDomainFilters() { Id = id };

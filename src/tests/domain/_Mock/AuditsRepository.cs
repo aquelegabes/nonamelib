@@ -1,6 +1,6 @@
 ﻿using NoNameLib.Domain.Enums;
 
-namespace NoNameLib.Domain.Tests.PlayTest;
+namespace NoNameLib.Domain.Tests.Mock;
 
 public class AuditsRepository : IRepository<Auditable<TestDomain>>
 {

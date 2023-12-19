@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NoNameLib.Domain.Tests.PlayTest;
+namespace NoNameLib.Domain.Tests.Mock;
 
 [Table(nameof(TestDomain))]
 public class TestDomain : IDomain<string>

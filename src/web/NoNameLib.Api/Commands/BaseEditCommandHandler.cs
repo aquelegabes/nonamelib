@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿#pragma warning disable CS8602
+
+using AutoMapper;
 using NoNameLib.Domain.Extensions;
 using NoNameLib.Domain.Interfaces;
 using static NoNameLib.Domain.Enums.TransactionType;

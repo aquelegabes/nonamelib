@@ -1,4 +1,6 @@
-﻿using NoNameLib.Domain.Exceptions;
+﻿#pragma warning disable CS8600, CS1066
+
+using NoNameLib.Domain.Exceptions;
 
 namespace NoNameLib.Application.Dispatcher;
 
@@ -6,9 +8,15 @@ public sealed partial class Dispatcher :
     IResultDispatcher, IAsyncResultDispatcher
 {
     private static readonly string _asyncInterfaceName = typeof(IAsyncCommand<>).Name;
-    private static Type GetCommandResultDispatcherServiceType(Type commandType, Type resultType, bool async = false) => !async ?
-        typeof(ICommand<,>).MakeGenericType(commandType, resultType)
-        : typeof(IAsyncCommand<,>).MakeGenericType(commandType, resultType);
+    private static Type GetCommandResultDispatcherServiceType(
+        Type commandType,
+        Type resultType,
+        bool async = false)
+    {
+        return !async ?
+            typeof(ICommand<,>).MakeGenericType(commandType, resultType)
+            : typeof(IAsyncCommand<,>).MakeGenericType(commandType, resultType);
+    }
 
     DispatchResult IResultDispatcher.Dispatch<TCommand>(
         TCommand command,
@@ -57,9 +65,11 @@ public sealed partial class Dispatcher :
         var taskType = typeof(Task<>).MakeGenericType(resultType);
 
         if (taskType != handleMethod?.ReturnType)
+        {
             throw new UnexpectedTypeException(
                         message: "Expected a handler that returned: " +
                                 $"\"{taskType.Name}\" type but received one returning: \"{handleMethod?.ReturnType.Name}\" type.");
+        }
 
         var result = (object)await (dynamic)handleMethod?.Invoke(handler, new object[] { command, cancellationToken });
 

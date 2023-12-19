@@ -1,9 +1,8 @@
 ﻿#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 
 using NoNameLib.Domain.Abstract;
-using NoNameLib.Domain.Enums;
 
-namespace NoNameLib.Domain.Tests.PlayTest;
+namespace NoNameLib.Domain.Tests.Mock;
 
 internal class TestDomainCommandHandler :
     Notifiable,

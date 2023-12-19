@@ -1,7 +1,4 @@
-﻿using NoNameLib.Domain.Enums;
-using NoNameLib.Domain.Extensions;
-
-namespace NoNameLib.Domain.Tests.Tests;
+﻿namespace NoNameLib.Domain.Tests;
 
 public partial class DapperRepositoryTests
 {
@@ -10,7 +7,7 @@ public partial class DapperRepositoryTests
     {
         var dapperObject = new DapperTestObjects();
         var testingObject = new DomainTestingObject();
-        var entity = testingObject.TestDomainList.First();
+        var entity = testingObject.TestDomainList[0];
 
         dapperObject.UnityOfWork.BeginTransaction();
         var affectedRows = dapperObject.Repository.SaveChanges(entity, TransactionType.Create);
@@ -67,6 +64,4 @@ public partial class DapperRepositoryTests
         Assert.NotNull(elements);
         Assert.NotEmpty(elements);
     }
-
-
 }

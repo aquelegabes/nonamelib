@@ -1,7 +1,4 @@
-﻿using NoNameLib.Domain.Enums;
-using NoNameLib.Domain.Extensions;
-
-namespace NoNameLib.Domain.Tests.PlayTest;
+﻿namespace NoNameLib.Domain.Tests.Mock;
 
 public class TestDomainRepository : IRepository<TestDomain>
 {
@@ -20,6 +17,7 @@ public class TestDomainRepository : IRepository<TestDomain>
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
     }
 
     public int SaveChanges(TestDomain domain, TransactionType eventType)

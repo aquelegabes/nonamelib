@@ -1,6 +1,6 @@
-﻿namespace NoNameLib.Domain.Tests.Tests;
+﻿namespace NoNameLib.Domain.Tests;
 
-public class RandomTests
+public class DomainTestingObjectTests
 {
     [Fact]
     public void GetConnectionStringTest_OK()

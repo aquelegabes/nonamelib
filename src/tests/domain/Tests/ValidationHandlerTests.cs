@@ -1,10 +1,8 @@
-using NoNameLib.Domain.Extensions;
-using NoNameLib.Domain.Tests.PlayTest;
 using System.ComponentModel.DataAnnotations;
 
-namespace NoNameLib.Domain.Tests.Tests;
+namespace NoNameLib.Domain.Tests;
 
-public class ValidationHandlerTest
+public class ValidationHandlerTests
 {
     [Fact]
     public void PassingTest_ValidateObject()
@@ -20,7 +18,7 @@ public class ValidationHandlerTest
         objectToValidate.Validate();
 
         // assert
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
     }
 
@@ -38,7 +36,7 @@ public class ValidationHandlerTest
 
         objectToValidate.Validate();
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
     }
 
@@ -57,7 +55,7 @@ public class ValidationHandlerTest
 
         objectToValidate.Validate();
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
         Assert.True(objectToValidate.CPF != null);
     }
@@ -119,7 +117,7 @@ public class ValidationHandlerTest
 
         Assert.Throws<ValidationException>(() => objectToValidate.Validate());
 
-        Assert.True(!string.IsNullOrWhiteSpace(objectToValidate.FullName));
+        Assert.False(string.IsNullOrWhiteSpace(objectToValidate.FullName));
         Assert.True(objectToValidate.BirthDate != default);
         Assert.True(objectToValidate.CPF != null);
     }

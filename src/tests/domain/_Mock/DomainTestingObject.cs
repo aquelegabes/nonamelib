@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+﻿#pragma warning disable CS8602, CS8600
 
-namespace NoNameLib.Domain.Tests.PlayTest;
+using System.Reflection;
+
+namespace NoNameLib.Domain.Tests.Mock;
 
 public class DomainTestingObject
 {
@@ -9,7 +11,7 @@ public class DomainTestingObject
         const string dbFileName = "db.sqlite3";
         string entryPoint = Assembly.GetEntryAssembly().Location;
         string path = Path.GetDirectoryName(entryPoint);
-        string fullPath = Path.Combine(path, dbFileName);
+        string fullPath = Path.Combine(path!, dbFileName);
 
         return $"Data Source={fullPath};";
     }
