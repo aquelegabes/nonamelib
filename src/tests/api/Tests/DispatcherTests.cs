@@ -1,79 +1,87 @@
-﻿namespace NoNameLib.Application.Tests
+﻿using NoNameLib.Application.Interfaces;
+
+namespace NoNameLib.Application.Tests
 {
     public class DispatcherTests
     {
         private readonly InputObject input = new() { Name = "Gabriel" };
 
+        #region OK
         [Fact]
-        public void Dispatcher_Void_OK()
+        public void Dispatcher_Handle_OK()
         {
-            var dispatcherMock = MockObjects.GetDispatcher(input);
+            var commandMock = MockObjects.GetCommandMock<InputObject>();
+            var spMock = MockObjects.GetServiceProviderMock<InputObject>(commandMock.Object);
+            var dispatcher = new Dispatcher.Dispatcher(spMock.Object) as IDispatcher;
 
-            Assert.NotNull(dispatcherMock);
-            Assert.NotNull(dispatcherMock.Object);
-
-            var dispatcher = dispatcherMock.Object;
             dispatcher.Dispatch(input);
-            dispatcherMock.Verify(
-                _ => _.Dispatch(input),
-                Times.Once());
 
-            Assert.True(true);
+            spMock.Verify(_ =>
+                _.GetService(typeof(ICommand<InputObject>))
+                , Times.Once());
+            commandMock.Verify(_ =>
+                _.Handle(input)
+                , Times.Once());
         }
 
         [Fact]
-        public async Task AsyncResultDispatcher_Task_OK()
+        public async Task AsyncResultDispatcher_Handle_OK()
         {
-            var dispatcherMock = MockObjects.GetAsyncDispatcher<InputObject, OutputObject>(input);
+            var commandMock = MockObjects.GetAsyncCommandOutputMock<InputObject, OutputObject>();
+            var spMock = MockObjects.GetServiceProviderMock<InputObject, OutputObject>(
+                commandMock.Object, true);
+            var dispatcher = new Dispatcher.Dispatcher(spMock.Object) as IAsyncResultDispatcher;
 
-            Assert.NotNull(dispatcherMock);
-            Assert.NotNull(dispatcherMock.Object);
+            var result = await dispatcher.Dispatch(input, typeof(OutputObject));
 
-            var dispatcher = dispatcherMock.Object;
-            var output = await dispatcher.Dispatch(input, typeof(OutputObject), default);
+            Assert.NotNull(result);
+            Assert.NotNull(result.GetResult<OutputObject>());
 
-            dispatcherMock.Verify(
-                _ => _.Dispatch(input, typeof(OutputObject), default),
-                Times.Once());
-
-            Assert.NotNull(output);
-            Assert.NotNull(output.GetResult<OutputObject>());
+            spMock.Verify(_ =>
+                _.GetService(typeof(IAsyncCommand<InputObject, OutputObject>))
+                , Times.Once());
+            commandMock.Verify(_ =>
+                _.Handle(input, default)
+                , Times.Once());
         }
 
         [Fact]
-        public void ResultDispatcher_String_OK()
+        public void ResultDispatcher_Handle_OK()
         {
-            var dispatcherMock = MockObjects.GetDispatcher<InputObject, string>(input);
+            var commandMock = MockObjects.GetCommandOutputMock<InputObject, OutputObject>();
+            var spMock = MockObjects.GetServiceProviderMock<InputObject, OutputObject>(commandMock.Object);
+            var dispatcher = new Dispatcher.Dispatcher(spMock.Object) as IResultDispatcher;
 
-            Assert.NotNull(dispatcherMock);
-            Assert.NotNull(dispatcherMock.Object);
+            var result = dispatcher.Dispatch(input, typeof(OutputObject));
 
-            var dispatcher = dispatcherMock.Object;
-            var output = dispatcher.Dispatch(input, typeof(string));
+            Assert.NotNull(result);
+            Assert.NotNull(result.GetResult<OutputObject>());
 
-            dispatcherMock.Verify(
-                _ => _.Dispatch(input, typeof(string)),
-                Times.Once());
-
-            Assert.NotNull(output);
-            Assert.NotNull(output.GetResult<string>());
+            spMock.Verify(_ =>
+                _.GetService(typeof(ICommand<InputObject, OutputObject>))
+                , Times.Once());
+            commandMock.Verify(_ =>
+                _.Handle(input)
+                , Times.Once());
         }
 
         [Fact]
         public async Task AsyncDispatcher_Task_OK()
         {
-            var dispatcherMock = MockObjects.GetAsyncDispatcher(input);
+            var commandMock = MockObjects.GetAsyncCommandMock<InputObject>();
+            var spMock = MockObjects.GetServiceProviderMock<InputObject>(commandMock.Object, true);
+            var dispatcher = new Dispatcher.Dispatcher(spMock.Object) as IAsyncDispatcher;
 
-            Assert.NotNull(dispatcherMock);
-            Assert.NotNull(dispatcherMock.Object);
+            await dispatcher.Dispatch(input);
 
-            var dispatcher = dispatcherMock.Object;
-            await dispatcher.Dispatch(input, default);
-            dispatcherMock.Verify(
-                _ => _.Dispatch(input, default),
-                Times.Once());
-
-            Assert.True(true);
+            spMock.Verify(_ =>
+                _.GetService(typeof(IAsyncCommand<InputObject>))
+                , Times.Once());
+            commandMock.Verify(_ =>
+                _.Handle(input, default)
+                , Times.Once());
         }
+
+        #endregion OK
     }
 }
